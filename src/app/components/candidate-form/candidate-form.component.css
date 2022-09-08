@@ -1,0 +1,33 @@
+.form-container {
+  display: flex;
+  margin: 2rem;
+}
+
+form {
+  margin: auto;
+  padding: 1.5rem;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  min-width: 20rem;
+}
+
+form > * {
+  width: 100%;
+}
+
+table {
+  width: 95%;
+  margin: 4rem auto;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.table-container {
+  min-width: 45rem;
+  padding-bottom: 0.25rem;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #f5f5f5 inset !important;
+}

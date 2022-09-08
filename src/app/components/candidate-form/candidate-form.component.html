@@ -1,0 +1,78 @@
+<div class="form-container">
+    <form (ngSubmit)="addData(candidateForm.value)" #candidateForm="ngForm">
+        <mat-form-field appearance="fill">
+            <mat-label>Full Name</mat-label>
+            <input type="text" name="fullName" matInput placeholder="Enter your full name" ngModel required>
+            <mat-error>You must enter a value</mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill">
+            <mat-label>Reason of joining Java team</mat-label>
+            <textarea type="text" name="reason" matInput maxlength="100" ngModel required></textarea>
+            <mat-hint align="end">Max 200 characters
+            </mat-hint>
+            <mat-error>You must enter a value</mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill">
+            <mat-label>Preferred drink</mat-label>
+            <mat-select [(ngModel)]="preferredDrink" name="drink" required>
+                <mat-option value="Beer">Beer</mat-option>
+                <mat-option value="Wine">Wine</mat-option>
+            </mat-select>
+            <mat-error>You must select a drink</mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill" *ngIf="preferredDrink=='Beer'">
+            <mat-label>Type</mat-label>
+            <mat-select [(ngModel)]="drinkType" name="type" required>
+                <mat-option *ngFor='let i of beersData' value={{i.name}}>{{i.name}}</mat-option>
+            </mat-select>
+            <mat-error>You must select a type</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill" *ngIf="preferredDrink=='Wine'">
+            <mat-label>Type</mat-label>
+            <mat-select [(ngModel)]="drinkType" name="type" required>
+                <mat-option *ngFor='let i of winesData' value={{i.wine}}>{{i.wine}}</mat-option>
+            </mat-select>
+            <mat-error>You must select a type</mat-error>
+        </mat-form-field>
+        <br>
+        <button [disabled]="candidateForm.invalid" mat-raised-button color="primary" type="submit"
+            value="submit">Submit</button>
+    </form>
+</div>
+<div class="table-container">
+    <table mat-table [dataSource]="dataSource">
+
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="fullName">
+            <th mat-header-cell *matHeaderCellDef> Full Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.fullName}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="reason">
+            <th mat-header-cell *matHeaderCellDef> Reason of joining Java team </th>
+            <td mat-cell *matCellDef="let element"> {{element.reason}} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="drink">
+            <th mat-header-cell *matHeaderCellDef> Drink </th>
+            <td mat-cell *matCellDef="let element"> {{element.drink}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef> Type of drink </th>
+            <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>
